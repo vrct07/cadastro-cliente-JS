@@ -5,8 +5,8 @@ const sFuncao = document.querySelector("#m-funcao");
 const sSalario = document.querySelector("#m-salario");
 const btnSalvar = document.querySelector("#btn-salvar");
 
-let itens;
-let id;
+let itens
+let id
 
 const getItensBD = () => (itens = JSON.parse(localStorage.getItem("dbFunc")) ?? []);
 const setItensBD = () => localStorage.setItem("dbFunc", JSON.stringify(itens));
@@ -34,7 +34,7 @@ function insertItem(item, index) {
       <td class="acao">
         <button onclick="deleteItem(${index})"><i class='bx bx-trash'></i></button>
       </td>
-    `
+    `;
   tbody.appendChild(tr);
 }
 
@@ -70,7 +70,7 @@ function openModal(edit = false, index = 0) {
 }
 
 btnSalvar.onclick = (e) => {
-  if (sNome.value == '' || sFuncao.value == '' || sSalario.value == '') {
+  if (sNome.value == "" || sFuncao.value == "" || sSalario.value == "") {
     return;
   }
 
@@ -94,3 +94,11 @@ btnSalvar.onclick = (e) => {
   loadItens();
   id = undefined;
 };
+
+function loadItens() {
+  itens = getItensBD();
+  tbody.innerHTML = "";
+  itens.forEach((item, index) => {
+    insertItem(item, index);
+  });
+}
